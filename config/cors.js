@@ -1,16 +1,16 @@
-const cors = require('cors');
+const cors = require("cors");
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Origem não permitida pelo CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+  ],
 };
 
 module.exports = cors(corsOptions);
